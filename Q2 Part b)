@@ -1,0 +1,19 @@
+install.packages("devtools")
+library(devtools)
+install_github("DougLuke/UserNetR")
+library(UserNetR)
+data(Bali)
+
+install.packages("ggnetwork")
+library(ggnetwork)
+
+ggnetplot = function(Net = Bali){
+  Net = ggnetwork(Net,layout = "kamadakawai")
+  (ggplot(Net, aes(x,y, xend = xend, yend = yend)) 
+    + geom_edges(color = "lightgrey") 
+    + geom_nodes(alpha = 0.3,size = 5) 
+    + geom_nodetext(aes(label = vertex.names),color = "blue") 
+    + theme_blank())
+}
+
+ggnetplot()
